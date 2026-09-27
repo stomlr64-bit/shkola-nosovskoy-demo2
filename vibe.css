@@ -152,7 +152,14 @@ section { padding: clamp(72px, 10vw, 136px) 0; }
 .close figure img { aspect-ratio: 4/3; object-fit: cover; }
 
 .foot { padding: 40px 20px 100px; text-align: center; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
-.foot__note { font-size: 12px; opacity: .85; }
+.foot__note { font-size: 12px; opacity: .85; margin-top: 36px; }
+.foot__grid { width: min(1180px, 100%); margin: 20px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; text-align: left; font-size: 15px; }
+.foot__brand { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; line-height: 1.5; }
+.foot__brand b { color: var(--ink); }
+.foot__h { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+.foot a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+.foot__links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+@media (max-width: 820px) { .foot__grid { grid-template-columns: 1fr; gap: 20px; } }
 
 /* ===== Отзывы ===== */
 .reviews { overflow: hidden; }
