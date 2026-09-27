@@ -18,6 +18,30 @@
   els.forEach(function (e) { io.observe(e); });
 })();
 
+// Отзывы: бегущие ленты (дублируем карточки для бесконечной прокрутки) и рейтинг
+(function () {
+  document.querySelectorAll('.marquee__row').forEach(function (row) {
+    Array.prototype.slice.call(row.children).forEach(function (c) {
+      var k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); row.appendChild(k);
+    });
+  });
+  var r = document.querySelector('.rating');
+  if (!r) return;
+  var num = r.querySelector('.rating__num'), done = false;
+  function run() {
+    if (done) return; done = true; r.classList.add('lit');
+    var target = parseFloat(num.getAttribute('data-count')), t0 = null;
+    function step(t) {
+      if (!t0) t0 = t; var p = Math.min((t - t0) / 1200, 1), e = 1 - Math.pow(1 - p, 3);
+      num.textContent = (target * e).toFixed(1).replace('.', ',');
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if (!('IntersectionObserver' in window)) { run(); return; }
+  new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { run(); o.disconnect(); } }, { threshold: 0.5 }).observe(r);
+})();
+
 // Шапка получает подложку после прокрутки
 (function () {
   var bar = document.getElementById('bar');
