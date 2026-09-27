@@ -42,6 +42,18 @@
   new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { run(); o.disconnect(); } }, { threshold: 0.5 }).observe(r);
 })();
 
+// Как добраться: вкладки по станциям
+(function () {
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var k = t.getAttribute('data-tab');
+      tabs.forEach(function (x) { x.classList.toggle('on', x === t); });
+      document.querySelectorAll('.pane').forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-pane') === k); });
+    });
+  });
+})();
+
 // Шапка получает подложку после прокрутки
 (function () {
   var bar = document.getElementById('bar');
